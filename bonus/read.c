@@ -16,35 +16,27 @@ void	minitoi(int *num, char *str, int *loop)
 {
 	*num = 0;
 	while (is_alpha(str[*loop]))
-	{
-		*num = *num * 10 + str[*loop] - '0';
-		*loop += 1;
-	}
+		*num = *num * 10 + str[*loop++] - '0';
 }
 
-void	get_flags(va_list *args, char *to_print, int *num, int *flags)
+void	get_flags(char *to_print, int *num, t_print *flags)
 {
-	(void) args;
-	if ((to_print[++num[1]] == '-' || is_not_zero(to_print[num[1]]))
-		&& flags[7] == -1)
-	{
-		if (to_print[num[1]] == '-' && num[1]++ > -10)
-			flags[1] = 1;
-		minitoi(&flags[7], to_print, &num[1]);
-	}
-	else if (to_print[num[1]] == '0' && flags[0] == 0 && ++flags[0] == 1)
-		minitoi(&flags[6], to_print, &num[1]);
-	else if (to_print[num[1]] == '.' && flags[2] == 0
-		&& ++flags[2] == 1 && ++num[1])
-		minitoi(&flags[8], to_print, &num[1]);
-	else if (to_print[num[1]] == '#' && flags[3] == 0 && ++num[1] > -1)
-		flags[3] = 1;
-	else if (to_print[num[1]] == ' ' && ++flags[4] == 1 && ++num[1] > -1)
-		minitoi(&flags[7], to_print, &num[1]);
-	else if (to_print[num[1]] == '+' && flags[5] == 0 && ++num[1] > -1)
-		flags[5] = 1;
+	if (to_print[++num[1]] == '-' && num[1]++)
+		flags->pading = 1;
+	else if (is_not_zero(to_print[num[1]]))
+		minitoi(&flags->pading, to_print, &num[1]);
+	else if (to_print[num[1]] == '0')
+		minitoi(&flags->zeros, to_print, &num[1]);
+	else if (to_print[num[1]] == '.' && ++num[1])
+		minitoi(&flags->length_restrictions, to_print, &num[1]);
+	else if (to_print[num[1]] == '#' && ++num[1] > -1)
+		flags->prefixox = 1;
+	else if (to_print[num[1]] == ' ' && ++num[1] > -1)
+		minitoi(&flags->spaces, to_print, &num[1]);
+	else if (to_print[num[1]] == '+' && ++num[1] > -1)
+		flags->sign = '+';
 	else if (to_print[num[1]] == '%')
 		return ;
 	if (is_flag(to_print[num[1]]) && num[1]-- > -123716)
-		get_flags(args, to_print, num, flags);
+		get_flags(to_print, num, flags);
 }

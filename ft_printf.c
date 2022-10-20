@@ -14,7 +14,8 @@
 
 
 
-void	putstrreplaceccount(va_list *args, char *to_print, int *num, int *flags)
+void	putstrreplaceccount(va_list *args,
+	char *to_print, int *num, t_print *flags)
 {	
 	if (to_print[num[1]] == 'c')
 		print_c(args, num, &num[1], flags);
@@ -36,26 +37,33 @@ void	putstrreplaceccount(va_list *args, char *to_print, int *num, int *flags)
 
 void	print_flags(int *flags)
 {
-	printf("\n|%i|%i|%i|%i|%i|%i|%i|%i|%i|%i|\n", flags[0], flags[1], flags[2], flags[3], flags[4], flags[5], flags[6], flags[7], flags[8], flags[9]);
+	printf("\n|%i|%i|%i|%i|%i|%i|%i|%i|%i|%i|\n",
+		flags[0], flags[1], flags[2], flags[3],
+		flags[4], flags[5], flags[6], flags[7], flags[8], flags[9]);
 }
 
-void	reset_flags(int *flags)
+void	reset_flags(t_print *flags)
 {
-	flags[0] = 0;
-	flags[2] = 0;
-	flags[3] = 0;
-	flags[4] = 0;
-	flags[5] = 0;
-	flags[6] = -1;
-	flags[7] = -1;
-	flags[8] = -1;
+	flags->symbol = 0;
+	flags->charr = 0;
+	flags->length = 0;
+	flags->length_restrictions = 0;
+	flags->num = 0;
+	flags->spaces = 0;
+	flags->zeros = 0;
+	flags->sign = 0;
+	flags->to_print = 0;
+	flags->pading = 0;
+	flags->leftpadding = 0;
+	flags->prefixox = 0;
+
 }
 
 int	ft_printf(const char *to_print, ...)
 {
-	va_list	args;
-	int		nums[2];
-	int		flags[10];
+	va_list		args;
+	int			nums[2];
+	t_print		flags;
 
 	va_start(args, to_print);
 	*nums = 0;
@@ -64,10 +72,9 @@ int	ft_printf(const char *to_print, ...)
 	{
 		if (to_print[nums[1]] == '%')
 		{
-			reset_flags(flags);
-			get_flags(&args, (char *) to_print, nums, flags);
-			//print_flags(flags);
-			putstrreplaceccount(&args, (char *) to_print, nums, flags);
+			reset_flags(&flags);
+			get_flags((char *) to_print, nums, &flags);
+			putstrreplaceccount(&args, (char *) to_print, nums, &flags);
 		}
 		else
 		{

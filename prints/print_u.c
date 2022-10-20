@@ -12,12 +12,13 @@
 
 #include "../ft_printf.h"
 
-void	print_u(va_list *args, int *len, int *i, int *flags)
+void	print_u(va_list *args, int *len, int *i, t_print *flags)
 {
 	char	*temp;
 
 	temp = ft_utoa((unsigned long int)va_arg(*args, unsigned long int));
-	print_space_num(temp, len, flags);
+	flags->to_print = temp;
+	print_utlimate(flags, len);
 	free(temp);
 	*i += 1;
 }

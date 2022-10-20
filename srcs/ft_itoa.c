@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-int	len(long nb, char sign)
+int	len(long nb)
 {
 	int		len;
 
@@ -21,8 +21,6 @@ int	len(long nb, char sign)
 		return (1);
 	if (nb < 0)
 		nb = nb * -1;
-	if (sign)
-		len++;
 	while (nb > 0)
 	{
 		nb = nb / 10;
@@ -31,37 +29,14 @@ int	len(long nb, char sign)
 	return (len);
 }
 
-char	*zero(char sign)
-{
-	char	*res;
-
-	if (sign == 0)
-	{
-		res = malloc(2);
-		res[0] = '0';
-		res[1] = 0;
-		return (res);
-	}
-	else
-	{
-		res = malloc(3);
-		res[0] = sign;
-		res[1] = '0';
-		res[2] = 0;
-		return (res);
-	}
-}
-
-char	*ft_itoa(int nb, char sign)
+char	*ft_itoa(int nb)
 {
 	char	*str;
 	long	n;
 	int		i;
 
-	if (nb == 0)
-		return (zero(sign));
 	n = nb;
-	i = len(n, sign);
+	i = len(n);
 	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!(str))
 		return (NULL);
@@ -69,7 +44,6 @@ char	*ft_itoa(int nb, char sign)
 	str[0] = 48;
 	if (n == 0)
 		return (str);
-	str[0] = sign;
 	if (n < 0)
 		n = n * -1;
 	while (n > 0)

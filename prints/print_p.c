@@ -12,14 +12,16 @@
 
 #include "../ft_printf.h"
 
-void	print_p(va_list *args, int *len, int *i, int *flags)
+void	print_p(va_list *args, int *len, int *i, t_print *flags)
 {
-	char	pointer [1230];
 	char	*temp;
 
 	temp = ft_itob((long long int)va_arg(*args, long long int),
 			"0123456789abcdef");
-	print_space(ft_strcat(ft_strcpy(pointer, "0x"), temp), len, flags);
+	flags->minmaj = 0;
+	flags->prefixox = 1;
+	flags->to_print = temp;
+	print_utlimate(flags, len);
 	free(temp);
 	*i += 1;
 }

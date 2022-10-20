@@ -12,14 +12,10 @@
 
 #include "../ft_printf.h"
 
-void	print_c(va_list *args, int *len, int *i, int *flags)
+void	print_c(va_list *args, int *len, int *i, t_print *flags)
 {
-	unsigned char	res;
-
-	res = (char)(unsigned char) va_arg(*args, int);
-	if (flags[7] > -1)
-		print_space_char(res, len, flags);
-	else
-		putcharcount(res, len);
+	flags->charr = (unsigned char) va_arg(*args, int);
+	flags->symbol = 'c';
+	print_utlimate(flags, len);
 	*i += 1;
 }

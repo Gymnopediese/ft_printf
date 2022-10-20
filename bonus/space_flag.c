@@ -9,7 +9,7 @@
 /*   Updated: 2022/10/20 11:52:02 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
 #include "../ft_printf.h"
 
 void	print_space(char *toprint, int *len, int *flags)
@@ -101,3 +101,4 @@ void	print_num_zeros(char *toprint, int *len, int *flags)
 		putcharcount('0', len);
 	putstrcount(&toprint[index], len);
 }
+ */

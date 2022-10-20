@@ -12,8 +12,9 @@
 
 #include "../ft_printf.h"
 
-void	print_s(va_list *args, int *len, int *i, int *flags)
+void	print_s(va_list *args, int *len, int *i, t_print *flags)
 {
 	*i += 1;
-	print_space(va_arg(*args, char *), len, flags);
+	flags->to_print = va_arg(*args, char *);
+	print_utlimate(flags, len);
 }

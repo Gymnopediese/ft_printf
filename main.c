@@ -18,8 +18,8 @@ int	main(void)
 {
 	void *pointer = malloc(323);
 	
-	printf("%i\n", printf("%% : %% | char : %c | str : %s | hex : %x | hex maj : %X | int : %i | unsigned int : %u | deci : %d | pointer : %p\n", '%', "hello world" , 111, 222, 3, 4, -5, pointer));
-	printf("%i\n", ft_printf("%% : %% | char : %c | str : %s | hex : %x | hex maj : %X | int : %i | unsigned int : %u | deci : %d | pointer : %p\n", '%', "hello world" , 111, 222, 3, 4, -5, pointer));
+	printf("%i\n",    printf("%% : %% | char : %c | str : %s | hex : %x | hex maj : %X | int : %i | unsigned int : %u | deci : %d | pointer : %p$\n", '%', "hello world" , 111, 222, 3, 4, -5, pointer));
+	printf("%i\n", ft_printf("%% : %% | char : %c | str : %s | hex : %x | hex maj : %X | int : %i | unsigned int : %u | deci : %d | pointer : %p$\n", '%', "hello world" , 111, 222, 3, 4, -5, pointer));
 	   printf("%10p, %10p, %10p, %10p, %10p, %10p\n", (void *)0, (void *)0xABCDE, (void *)ULONG_MAX, (void *)LONG_MIN, (void *)-1, (void *)-2352);
 	ft_printf("%10p, %10p, %10p, %10p, %10p, %10p\n", (void *)0, (void *)0xABCDE, (void *)ULONG_MAX, (void *)LONG_MIN, (void *)-1, (void *)-2352);
 	printf(">------------<%36.30d>------------<\n", -885918674);

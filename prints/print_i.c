@@ -12,22 +12,17 @@
 
 #include "../ft_printf.h"
 
-void	print_i(va_list *args, int *len, int *i, int *flags)
+void	print_i(va_list *args, int *len, int *i, t_print *flags)
 {
 	char	*temp;
 	int		top;
-	char	maqueu;
 
 	top = va_arg(*args, int);
-	maqueu = 0;
-	if (top < 0)
-		maqueu = '-';
-	if (flags[5] && top > -1)
-		maqueu = '+';
-	if (flags[4] && top > -1)
-		maqueu = ' ';
-	temp = ft_itoa(top, maqueu);
-	print_space_num(temp, len, flags);
+	if (top < 0 && ++flags->length)
+		flags->sign = '-';
+	temp = ft_itoa(top);
+	flags->to_print = temp;
+	print_utlimate(flags, len);
 	free(temp);
 	*i += 1;
 }
