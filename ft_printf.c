@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 10:13:45 by tate              #+#    #+#             */
-/*   Updated: 2022/10/20 12:05:26 by albaud           ###   ########.fr       */
+/*   Updated: 2022/10/21 15:39:29 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	reset_flags(t_print *flags)
 	flags->symbol = 0;
 	flags->charr = 0;
 	flags->length = 0;
-	flags->length_restrictions = 0;
+	flags->lrest = -1;
 	flags->num = 0;
 	flags->spaces = 0;
 	flags->zeros = 0;
@@ -56,7 +56,6 @@ void	reset_flags(t_print *flags)
 	flags->pading = 0;
 	flags->leftpadding = 0;
 	flags->prefixox = 0;
-
 }
 
 int	ft_printf(const char *to_print, ...)

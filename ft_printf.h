@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:23:32 by tate              #+#    #+#             */
-/*   Updated: 2022/10/20 12:08:50 by albaud           ###   ########.fr       */
+/*   Updated: 2022/10/21 15:03:28 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct s_print
 	char			symbol;
 	int				num;
 	int				length;
-	int				length_restrictions;
+	int				toprint_length;
+	int				lrest;
 	int				spaces;
 	int				zeros;
 	int				pading;
@@ -35,7 +36,6 @@ typedef struct s_print
 	int				prefixox;
 	int				minmaj;
 }	t_print;
-
 
 int		indexof(char *src, char target, int mode);
 void	get_flags(char *to_print, int *num, t_print *flags);

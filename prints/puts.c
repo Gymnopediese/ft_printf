@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:19:27 by albaud            #+#    #+#             */
-/*   Updated: 2022/10/20 10:03:49 by albaud           ###   ########.fr       */
+/*   Updated: 2022/10/21 13:46:48 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void	putstrncount(char *c, int *num, int len)
 	if (len == 0)
 		return ;
 	i = -1;
-	while (len--)
-		putcharcount(c[++i], num);
+	while (len-- > 0 && c[++i])
+		putcharcount(c[i], num);
 }
