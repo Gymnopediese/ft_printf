@@ -1,10 +1,10 @@
 # ft_printf
 
-%c		: char
-%s		: string
-%i, d 	: print a number
-%x		: hexadecimal number
-%X		: hexadecimal number in majuscule
-%f		: float
-%fd		: a file content
-%g		: a directory content
+%c		: char\n
+%s		: string\n
+%i, d 	: print a number\n
+%x		: hexadecimal number\n
+%X		: hexadecimal number in majuscule\n
+%f		: float\n
+%fd		: a file content\n
+%g		: a directory content\n
