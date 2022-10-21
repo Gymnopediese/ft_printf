@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:12:44 by albaud            #+#    #+#             */
-/*   Updated: 2022/10/21 15:38:48 by albaud           ###   ########.fr       */
+/*   Updated: 2022/10/21 15:47:35 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	modeling(t_print *flags, int *len)
 {
 	while (flags->lrest-- > flags->toprint_length && flags->symbol != 's')
 		putcharcount('0', len);
-	while (--flags->zeros - flags->toprint_length > -1)
+	while (--flags->zeros - flags->length > -1)
 		putcharcount('0', len);
 	impression(flags, len);
 }
