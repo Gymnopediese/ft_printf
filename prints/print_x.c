@@ -18,6 +18,9 @@ void	print_x(va_list *args, int *len, int *i, t_print *flags)
 
 	temp = ft_itob(va_arg(*args, unsigned int), "0123456789abcdef");
 	flags->minmaj = 0;
+	flags->sign = 0;
+	if (temp[0] == '0')
+		flags->prefixox = 0;
 	flags->to_print = temp;
 	print_utlimate(flags, len);
 	free(temp);

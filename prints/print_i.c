@@ -20,6 +20,7 @@ void	print_i(va_list *args, int *len, int *i, t_print *flags)
 	top = va_arg(*args, int);
 	if (top < 0 && ++flags->length)
 		flags->sign = '-';
+	flags->prefixox = 0;
 	temp = ft_itoa(top);
 	flags->to_print = temp;
 	print_utlimate(flags, len);

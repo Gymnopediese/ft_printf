@@ -12,6 +12,13 @@
 
 #include "../ft_printf.h"
 
+
+
+void print(t_print *flags)
+{
+	printf("\n|%i|%i|%i|%i|%i|\n", flags->pading,flags->zeros, flags->length, flags->lrest, flags->toprint_length);
+}
+
 void	impression(t_print *flags, int *len)
 {
 	if (flags->symbol == 'c')
@@ -20,15 +27,6 @@ void	impression(t_print *flags, int *len)
 		putstrncount(flags->to_print, len, flags->length);
 	else
 		putstrncount(flags->to_print, len, flags->toprint_length);
-}
-
-void	modeling(t_print *flags, int *len)
-{
-	while (flags->lrest-- > flags->toprint_length && flags->symbol != 's')
-		putcharcount('0', len);
-	while (--flags->zeros - flags->length > -1)
-		putcharcount('0', len);
-	impression(flags, len);
 }
 
 void	pre_modeling(t_print *flags, int *len)
@@ -40,7 +38,38 @@ void	pre_modeling(t_print *flags, int *len)
 		putstrcount("0x", len);
 	if (flags->sign && flags->symbol != 's')
 		putcharcount(flags->sign, len);
-	modeling(flags, len);
+
+}
+
+void	modeling(t_print *flags, int *len)
+{
+	while (--flags->zeros >= flags->length && flags->lrest > -1
+		&& !flags->leftpadding)
+		putcharcount(' ', len);
+	pre_modeling(flags, len);
+	while (flags->zeros-- >= flags->length && !flags->leftpadding)
+		putcharcount('0', len);
+	while (flags->lrest-- > flags->toprint_length && flags->symbol != 's')
+		putcharcount('0', len);
+	impression(flags, len);
+}
+
+void	filament_length2(t_print *flags)
+{
+	if (flags->length > flags->lrest && flags->lrest > -1
+		&& flags->symbol == 's')
+		flags->length = flags->lrest;
+	if (flags->length < flags->lrest && flags->symbol != 's')
+		flags->length = flags->lrest;
+	if (flags->sign && flags->symbol != 's')
+		flags->length++;
+	if (flags->symbol == 'p' || flags->prefixox)
+		flags->length += 2;
+	if (flags->lrest == 0 && flags->symbol != 's' && flags->to_print[0] == '0')
+	{
+		flags->toprint_length = 0;
+		flags->length = 0;
+	}
 }
 
 void	filament_length(t_print *flags)
@@ -52,22 +81,17 @@ void	filament_length(t_print *flags)
 	else
 		flags->toprint_length = 6;
 	flags->length = flags->toprint_length;
-	if (flags->sign && flags->symbol != 's')
-		flags->length++;
-	if (flags->symbol == 'p' || flags->prefixox)
-		flags->length += 2;
-	if (flags->length > flags->lrest && flags->lrest > -1)
-		flags->length = flags->lrest;
+	filament_length2(flags);
 }
 
 void	print_utlimate(t_print *flags, int *len)
 {
 	filament_length(flags);
 	if (flags->leftpadding == 1)
-		pre_modeling(flags, len);
+		modeling(flags, len);
 	while (--flags->pading >= flags->length)
 		putcharcount(' ', len);
 	if (flags->leftpadding == 0)
-		pre_modeling(flags, len);
+		modeling(flags, len);
 }
 

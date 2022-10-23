@@ -18,6 +18,8 @@ void	print_u(va_list *args, int *len, int *i, t_print *flags)
 
 	temp = ft_utoa((unsigned long int)va_arg(*args, unsigned long int));
 	flags->to_print = temp;
+	flags->sign = 0;
+	flags->prefixox = 0;
 	print_utlimate(flags, len);
 	free(temp);
 	*i += 1;
